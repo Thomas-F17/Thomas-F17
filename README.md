@@ -7,8 +7,6 @@
 - 💬 Ask me about __Finance, Options, Convertible Bonds...__
 - ⚡ Fun fact: I have lived over 8 years in Asia
 
-<br/>
-
 ### Contact me:
 
 <a href="https://www.linkedin.com/in/thomas-fouilloux-1696341aa/"><img src="https://www.vectorlogo.zone/logos/linkedin/linkedin-icon.svg" width="40" height="40"/></a>
