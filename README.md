@@ -7,6 +7,13 @@
 - 💬 Ask me about __Finance, Options, Convertible Bonds...__
 - ⚡ Fun fact: I have lived over 8 years in Asia
 
+### Most Recent Project:
+
+<a href="https://github.com/Thomas-F17/Quantitative-Finance-App">Quantitative Finance Python Application</a>
+<a>Description: This application calculates option prices via two methods; Monte Carlo Simulation and Black-Scholes-Merton.
+Further, this application calculates Value at Risk and Conditional Value at Risk for any stock using two methods; Historical Method and Parametric Method (both for Normal and T -Distributions).</a>
+
+
 ### Contact me:
 
 <a href="https://www.linkedin.com/in/thomas-fouilloux-1696341aa/"><img src="https://www.vectorlogo.zone/logos/linkedin/linkedin-icon.svg" width="40" height="40"/></a>
