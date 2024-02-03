@@ -9,24 +9,6 @@
 
 <br/>
 
-
-<table>
-    <tr>
-        <th>My Website</th>
-        <th>My CV</th>
-    </tr>
-    <tr>
-        <td>
-            <a href="https://github.com/Thomas-F17">🌐</a>
-        </td>
-        <td>
-            <a href="">📃</a>
-        </td>
-    </tr>
-</table>
-
-
-
 ### Contact me:
 
 <a href="https://www.linkedin.com/in/thomas-fouilloux-1696341aa/"><img src="https://www.vectorlogo.zone/logos/linkedin/linkedin-icon.svg" width="40" height="40"/></a>
