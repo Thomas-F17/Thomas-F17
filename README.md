@@ -9,10 +9,9 @@
 
 ### Most Recent Project:
 
-<a href="https://github.com/Thomas-F17/Quantitative-Finance-App">Quantitative Finance Python Application</a>
-<a>Description: This application calculates option prices via two methods; Monte Carlo Simulation and Black-Scholes-Merton.
-Further, this application calculates Value at Risk and Conditional Value at Risk for any stock using two methods; Historical Method and Parametric Method (both for Normal and T -Distributions).</a>
-
+<a href="https://github.com/Thomas-F17/Quantitative-Finance-App">Quantitative Finance Python Application</a><br>
+<p>Description: This application calculates option prices via two methods; Monte Carlo Simulation and Black-Scholes-Merton.
+Further, this application calculates Value at Risk and Conditional Value at Risk for any stock using two methods; Historical Method and Parametric Method (both for Normal and T -Distributions).</p>
 
 ### Contact me:
 
