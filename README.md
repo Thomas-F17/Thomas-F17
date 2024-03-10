@@ -3,7 +3,7 @@
 ### Student in Management with Finance at Warwick University
 
 - 🔭 I’m currently working on: __Options and Derivatives__ 
-- 🌱 I’m currently learning: __Options Theory, Stochastic Calculus, Python__
+- 🌱 I’m currently learning: __Options Theory, Stochastic Calculus, Python, C++__
 - 💬 Ask me about __Finance, Options, Convertible Bonds...__
 - ⚡ Fun fact: I have lived over 8 years in Asia
 
