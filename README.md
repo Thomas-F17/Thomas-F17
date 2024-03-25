@@ -45,7 +45,7 @@ Further, this application calculates Value at Risk and Conditional Value at Risk
         <td>Programming/Backend</td>
         <td>
             <a href=""><img src="https://github.com/devicons/devicon/blob/v2.13.0/icons/python/python-original.svg" width="40" height="40"/></a>
-            <a href=""><img src="https://github.com/devicons/devicon/blob/v2.13.0/icons/python/matlab-original.svg" width="40" height="40"/></a>
+            <a href=""><img src="https://github.com/devicons/devicon/blob/v2.13.0/icons/matlab/matlab-original.svg" width="40" height="40"/></a>
         </td>
     </tr>
     <tr>
