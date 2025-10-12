@@ -1,13 +1,13 @@
 # Hey 👋, I'm Thomas Fouilloux
 
-### Student in Operations Research within LSE's Department of Mathematics
+### I am a student in Operations Research within LSE's Department of Mathematics
 
 - 🔭 I’m currently completing my degree with a focus on: __Optimisation, Machine Learning/Deep Learning, and Stochastic Simulation__ 
 - 🌱 I’m currently learning: __Machine Learning, Stochastic Processes, R, ...__
 - 💬 Ask me about __Financial Derivatives, Convertible Bonds...__
 - ⚡ Fun fact: I have lived over 8 years in Asia
 
-### Most Recent Project:
+### Example Projects:
 
 <a href="https://github.com/Thomas-F17/Quantitative-Finance-App">Quantitative Finance Python Application</a><br>
 <p>Description: This application calculates option prices via two methods; Monte Carlo Simulation and Black-Scholes-Merton.
