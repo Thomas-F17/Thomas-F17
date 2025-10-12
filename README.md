@@ -19,9 +19,15 @@ Further, this application calculates Value at Risk and Conditional Value at Risk
     <tr>
         <td>Companies</td>
         <td>
-            <a href=""><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/London_school_of_economics_logo_with_name.svg/250px-London_school_of_economics_logo_with_name.svg.png" width="160" height="80"/></a>
             <a href=""><img src="https://www.vectorlogo.zone/logos/bankofamerica/bankofamerica-ar21.svg" width="160" height="80"/></a>
             <a href=""><img src="https://media-s3-us-east-1.ceros.com/amundi/images/2022/02/09/2b60ea92f557671c7fb2ad59a309b0db/logo-montpensier.png" width="190" height="80"/></a>
+            <a href=""><img src="https://iventiv.com/sites/default/files/WBS_Resized.png" width="180" height="80"/></a>
+        </td>
+    </tr>
+    <tr>
+        <td>Universities</td>
+        <td>
+            <a href=""><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/London_school_of_economics_logo_with_name.svg/250px-London_school_of_economics_logo_with_name.svg.png" width="160" height="80"/></
             <a href=""><img src="https://iventiv.com/sites/default/files/WBS_Resized.png" width="180" height="80"/></a>
         </td>
     </tr>
