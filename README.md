@@ -1,10 +1,10 @@
 # Hey 👋, I'm Thomas Fouilloux
 
-### Student in Management with Finance at Warwick University
+### Student in Operations Research within LSE's Department of Mathematics
 
-- 🔭 I’m currently working on: __Options and Derivatives__ 
-- 🌱 I’m currently learning: __Options Theory, Stochastic Calculus, Python, C++__
-- 💬 Ask me about __Finance, Options, Convertible Bonds...__
+- 🔭 I’m currently completing my degree with a focus on: __Optimisation, Machine Learning/Deep Learning, and Stochastic Simulation__ 
+- 🌱 I’m currently learning: __Machine Learning, Stochastic Processes, R, ...__
+- 💬 Ask me about __Financial Derivatives, Convertible Bonds...__
 - ⚡ Fun fact: I have lived over 8 years in Asia
 
 ### Most Recent Project:
@@ -19,12 +19,17 @@ Further, this application calculates Value at Risk and Conditional Value at Risk
     <tr>
         <td>Companies</td>
         <td>
+            <a href=""><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/London_school_of_economics_logo_with_name.svg/250px-London_school_of_economics_logo_with_name.svg.png" width="160" height="80"/></a>
             <a href=""><img src="https://www.vectorlogo.zone/logos/bankofamerica/bankofamerica-ar21.svg" width="160" height="80"/></a>
             <a href=""><img src="https://media-s3-us-east-1.ceros.com/amundi/images/2022/02/09/2b60ea92f557671c7fb2ad59a309b0db/logo-montpensier.png" width="190" height="80"/></a>
             <a href=""><img src="https://iventiv.com/sites/default/files/WBS_Resized.png" width="180" height="80"/></a>
         </td>
     </tr>
 </table>
+
+- I previously worked for c. 2 years as a Convertible Bonds and Equity Derivatives Analyst at Bank of America Merrill Lynch
+- I worked as a Buyside Equity Analyst at Montpensier Finance for c. 6 months
+- I also completed my Bachelor's Degree in Management with Finance at Warwick University
 
 ### Toolset
 
@@ -46,6 +51,7 @@ Further, this application calculates Value at Risk and Conditional Value at Risk
         <td>
             <a href=""><img src="https://github.com/devicons/devicon/blob/v2.13.0/icons/python/python-original.svg" width="40" height="40"/></a>
             <a href=""><img src="https://github.com/devicons/devicon/blob/v2.13.0/icons/matlab/matlab-original.svg" width="40" height="40"/></a>
+            <a href=""><img src="https://github.com/devicons/devicon/blob/v2.13.0/icons/r/r-original.svg" width="40" height="40"/></a>
         </td>
     </tr>
     <tr>
