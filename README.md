@@ -61,6 +61,7 @@ Further, this application calculates Value at Risk and Conditional Value at Risk
             <a href=""><img src="https://github.com/devicons/devicon/blob/v2.13.0/icons/python/python-original.svg" width="40" height="40"/></a>
             <a href=""><img src="https://github.com/devicons/devicon/blob/v2.13.0/icons/matlab/matlab-original.svg" width="40" height="40"/></a>
             <a href=""><img src="https://github.com/devicons/devicon/blob/v2.13.0/icons/r/r-original.svg" width="40" height="40"/></a>
+            <a href=""><img src="https://iconape.com/wp-content/files/tb/345907/svg/345907.svg" width="40" height="40"/></a>
         </td>
     </tr>
     <tr>
