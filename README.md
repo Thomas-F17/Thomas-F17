@@ -30,7 +30,7 @@ Further, this application calculates Value at Risk and Conditional Value at Risk
     <tr>
         <td>Universities</td>
         <td>
-            <a href=""><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/London_school_of_economics_logo_with_name.svg/250px-London_school_of_economics_logo_with_name.svg.png" width="160" height="80"/></a>&nbsp;&nbsp;
+            <a href=""><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/London_school_of_economics_logo_with_name.svg/250px-London_school_of_economics_logo_with_name.svg.png"/></a>&nbsp;&nbsp;
             <a href=""><img src="https://iventiv.com/sites/default/files/WBS_Resized.png" width="180" height="80"/></a>
         </td>
     </tr>
