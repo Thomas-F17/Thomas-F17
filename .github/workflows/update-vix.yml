@@ -1,0 +1,27 @@
+name: Update VIX snapshot
+
+on:
+  schedule:
+    - cron: "30 22 * * 1-5"   # weekdays at 22:30 UTC, after the US close
+  workflow_dispatch:          # lets you run it by hand from the Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Fetch data and rebuild the snapshot
+        run: python scripts/update_vix.py
+      - name: Commit if anything changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898333+github-actions[bot]@users.noreply.github.com"
+          git add assets/vix.svg
+          git diff --cached --quiet || git commit -m "Update VIX snapshot"
+          git push
