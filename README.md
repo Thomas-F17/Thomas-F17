@@ -4,7 +4,7 @@
 
 <br/>
 
-<a href="https://www.linkedin.com/in/thomas-fouilloux-1696341aa/"><img src="https://www.vectorlogo.zone/logos/linkedin/linkedin-icon.svg" alt="LinkedIn" height="36"/></a>
+<a href="https://www.linkedin.com/in/thomas-fouilloux-1696341aa/"><img src="https://www.vectorlogo.zone/logos/linkedin/linkedin-icon.svg" alt="LinkedIn" height="36" style="margin-top: 12px"/></a>
 
 </div>
 
