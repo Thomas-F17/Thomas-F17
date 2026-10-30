@@ -9,13 +9,12 @@ Usage:  python scripts/update_vix.py          (live data, standard library only)
         python scripts/update_vix.py --demo   (synthetic data, for offline previews)
 """
 import csv, datetime as dt, io, math, os, random, sys, urllib.request
+from svgfont import SERIF, MONO, embed
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FRED = "https://fred.stlouisfed.org/graph/fredgraph.csv?id={}"
 YEARS_JSON, DAYS_SVG = 1.2, 260
 NAVY, NAVY2, LINE, STEEL, AMBER, INK, MUTED = "#0B1F3A", "#13294A", "#1C365A", "#4A79A8", "#F2A900", "#E6EDF5", "#7F98B3"
-MONO = "IBM Plex Mono,SFMono-Regular,Menlo,Consolas,monospace"
-SANS = "IBM Plex Sans,-apple-system,Segoe UI,Helvetica,Arial,sans-serif"
 
 def get(url):
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (readme-vix-updater)"})
@@ -105,9 +104,9 @@ def svg(rows):
     asof = dt.date.fromisoformat(last["date"]).strftime("%d %b %Y")
     pts_text = lambda p: f"±{p:.0f} pts on the S&amp;P 500" if p is not None else "S&amp;P 500 move on a 1σ basis"
     def stat(x, label, big, small):
-        return (f'<text x="{x}" y="50" fill="{MUTED}" style="font-family:{MONO};font-size:12px">{label}</text>'
-                f'<text x="{x}" y="84" fill="{INK}" style="font-family:{SANS};font-size:28px;font-weight:600">{big}</text>'
-                f'<text x="{x}" y="104" fill="{MUTED}" style="font-family:{MONO};font-size:12px">{small}</text>')
+        return (f'<text x="{x}" y="50" fill="{MUTED}" style="font-family:{MONO};font-size:13px">{label}</text>'
+                f'<text x="{x}" y="84" fill="{INK}" style="font-family:{SERIF};font-size:28px;font-weight:700">{big}</text>'
+                f'<text x="{x}" y="104" fill="{MUTED}" style="font-family:{MONO};font-size:13px">{small}</text>')
     stats = (stat(L, "VIX", f'{last["vix"]:.2f}', f"as of {asof}")
              + stat(L + 230, "Implied daily move", f'±{last["daily_pct"]:.2f}%', pts_text(last["daily_pts"]))
              + stat(L + 490, "Implied weekly move", f'±{last["weekly_pct"]:.2f}%', pts_text(last["weekly_pts"])))
@@ -123,12 +122,12 @@ def svg(rows):
             f'<animate attributeName="opacity" values="0.8;0" dur="2s" begin="2.5s" repeatCount="indefinite"/></circle></g>')
     axes = (f'<text x="{L-10}" y="{T-12}" text-anchor="end" fill="{MUTED}">VIX</text>'
             f'<text x="{R+10}" y="{T-12}" fill="{MUTED}">Daily</text>')
-    foot = (f'<text x="{L}" y="{H-14}" fill="{MUTED}" style="font-family:{MONO};font-size:10.5px">'
+    foot = (f'<text x="{L}" y="{H-14}" fill="{MUTED}" style="font-family:{MONO};font-size:11.5px">'
             f'Last 12 months. One-standard-deviation moves: VIX/√252 daily, VIX/√52 weekly. Updated each weekday.</text>')
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-labelledby="t">'
             f'<title id="t">VIX {last["vix"]:.2f} as of {asof}: implied S&amp;P 500 move ±{last["daily_pct"]:.2f}% daily, ±{last["weekly_pct"]:.2f}% weekly</title>'
             f'<rect width="{W}" height="{H}" rx="12" fill="{NAVY}"/>{stats}'
-            f'<g style="font-family:{MONO};font-size:11px">{"".join(g)}{axes}</g>{line}{foot}</svg>')
+            f'<g style="font-family:{MONO};font-size:12px">{"".join(g)}{axes}</g>{line}{foot}</svg>')
 
 def main():
     if "--demo" in sys.argv:
@@ -139,7 +138,7 @@ def main():
     if len(rows) < 30:
         sys.exit("Couldn't get enough VIX data from any source; leaving the existing files unchanged.")
     os.makedirs(f"{ROOT}/assets", exist_ok=True)
-    open(f"{ROOT}/assets/vix.svg", "w", encoding="utf-8").write(svg(rows))
+    open(f"{ROOT}/assets/vix.svg", "w", encoding="utf-8").write(embed(svg(rows)))
     print(f'{len(rows)} rows, latest {rows[-1]["date"]}: VIX {rows[-1]["vix"]}')
 
 if __name__ == "__main__":

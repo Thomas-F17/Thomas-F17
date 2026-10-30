@@ -9,14 +9,13 @@ Usage:  GITHUB_TOKEN=... python scripts/update_stats.py [username]
         python scripts/update_stats.py --demo   (made-up numbers, for offline previews)
 """
 import json, os, sys, urllib.request
+from svgfont import SERIF, MONO, embed
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 USER = next((a for a in sys.argv[1:] if not a.startswith("--")), "Thomas-F17")
 HIDE = {"php", "scss", "css", "html", "batchfile", "gherkin", "freemarker", "xslt", "tsql", "ruby"}
 TOP_N = 6
 NAVY, NAVY2, LINE, AMBER, INK, MUTED = "#0B1F3A", "#13294A", "#1C365A", "#F2A900", "#E6EDF5", "#7F98B3"
-MONO = "IBM Plex Mono,SFMono-Regular,Menlo,Consolas,monospace"
-SANS = "IBM Plex Sans,-apple-system,Segoe UI,Helvetica,Arial,sans-serif"
 
 QUERY = """
 query($login: String!, $after: String) {
@@ -86,7 +85,7 @@ def esc(t): return str(t).replace("&", "&amp;").replace("<", "&lt;").replace(">"
 def panel(W, H, title, body, label):
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="{esc(label)}">'
             f'<rect width="{W}" height="{H}" rx="12" fill="{NAVY}"/>'
-            f'<text x="24" y="36" fill="{AMBER}" style="font-family:{SANS};font-size:16px;font-weight:600">{title}</text>{body}</svg>')
+            f'<text x="24" y="36" fill="{AMBER}" style="font-family:{SERIF};font-size:16px;font-weight:700">{title}</text>{body}</svg>')
 
 def fade(i):
     return (f'opacity="0"><animate attributeName="opacity" from="0" to="1" begin="{0.15 + i*0.12:.2f}s" dur="0.5s" fill="freeze"/>')
@@ -97,8 +96,8 @@ def stats_svg(s):
     W, H = 420, 210; body = []
     for i, (k, v) in enumerate(rows):
         y = 70 + i * 23
-        body.append(f'<g {fade(i)}<text x="24" y="{y}" fill="{MUTED}" style="font-family:{MONO};font-size:13px">{k}</text>'
-                    f'<text x="{W-24}" y="{y}" text-anchor="end" fill="{INK}" style="font-family:{MONO};font-size:13px;font-weight:600">{v:,}</text></g>')
+        body.append(f'<g {fade(i)}<text x="24" y="{y}" fill="{MUTED}" style="font-family:{MONO};font-size:14px">{k}</text>'
+                    f'<text x="{W-24}" y="{y}" text-anchor="end" fill="{INK}" style="font-family:{MONO};font-size:14px;font-weight:700">{v:,}</text></g>')
     label = ", ".join(f"{k}: {v}" for k, v in rows)
     return panel(W, H, "GitHub stats", "".join(body), f"GitHub stats. {label}")
 
@@ -116,8 +115,8 @@ def langs_svg(s):
         lx, ly = 24 + col * 196, 96 + row * 30
         pct = 100 * size / total
         legend.append(f'<g {fade(i)}<circle cx="{lx+5}" cy="{ly-4}" r="5" fill="{color}"/>'
-                      f'<text x="{lx+16}" y="{ly}" fill="{INK}" style="font-family:{MONO};font-size:12px">{esc(name)}</text>'
-                      f'<text x="{lx+186}" y="{ly}" text-anchor="end" fill="{MUTED}" style="font-family:{MONO};font-size:12px">{pct:.1f}%</text></g>')
+                      f'<text x="{lx+16}" y="{ly}" fill="{INK}" style="font-family:{MONO};font-size:13px">{esc(name)}</text>'
+                      f'<text x="{lx+186}" y="{ly}" text-anchor="end" fill="{MUTED}" style="font-family:{MONO};font-size:13px">{pct:.1f}%</text></g>')
     clip = f'<clipPath id="bar"><rect x="24" y="54" width="{bw}" height="10" rx="5"/></clipPath>'
     body = f'<defs>{clip}</defs><g clip-path="url(#bar)">{"".join(segs)}</g>{"".join(legend)}'
     label = ", ".join(f"{n} {100*v[0]/total:.1f}%" for n, v in top)
@@ -135,8 +134,8 @@ def main():
         except Exception as e:
             sys.exit(f"Couldn't read stats from the GitHub API ({e}); leaving the existing cards unchanged.")
     os.makedirs(f"{ROOT}/assets", exist_ok=True)
-    open(f"{ROOT}/assets/stats.svg", "w", encoding="utf-8").write(stats_svg(s))
-    open(f"{ROOT}/assets/langs.svg", "w", encoding="utf-8").write(langs_svg(s))
+    open(f"{ROOT}/assets/stats.svg", "w", encoding="utf-8").write(embed(stats_svg(s)))
+    open(f"{ROOT}/assets/langs.svg", "w", encoding="utf-8").write(embed(langs_svg(s)))
     print(f"Stats cards built: {s['repos']} repos, {len(s['langs'])} languages")
 
 if __name__ == "__main__":
