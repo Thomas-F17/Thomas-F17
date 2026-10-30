@@ -2,9 +2,11 @@
 
 <img src="./assets/header.svg" width="100%" alt="Thomas Fouilloux: Equity Investment Risk at T. Rowe Price, MSc Operations Research and Analytics at LSE"/>
 
-<br/>
+</div>
 
-<a href="https://www.linkedin.com/in/thomas-fouilloux-1696341aa/"><img src="https://www.vectorlogo.zone/logos/linkedin/linkedin-icon.svg" alt="LinkedIn" height="36" style="margin-top: 12px"/></a>
+<div align="center">
+
+<a href="https://www.linkedin.com/in/thomas-fouilloux-1696341aa/"><img src="https://www.vectorlogo.zone/logos/linkedin/linkedin-icon.svg" alt="LinkedIn" height="36" /></a>
 
 </div>
 
