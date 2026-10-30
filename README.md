@@ -19,12 +19,12 @@
 <tr>
 <td width="150" align="center"><a href="https://www.troweprice.com"><img src="https://companieslogo.com/img/orig/TROW-a6168310.png?t=1720244494&download=false" alt="T. Rowe Price" height="36"/></a></td>
 <td><b>T. Rowe Price</b><br/>Equity Investment Risk, working on equity risk and tail risk models</td>
-<td align="right" nowrap><sub>London</sub><br/><sub>Since June 2026</sub></td>
+<td align="right" nowrap><sub>London</sub><br/><sub>Jun 2026 - Present</sub></td>
 </tr>
 <tr>
 <td width="150" align="center"><a href="https://aletaindex.com/"><img src="https://aletaindex.com/assets/graphics/logo-dark.svg" alt="Aleta Index" height="36"/></a></td>
 <td><b>Aleta Index</b><br/>Part-time Data Scientist at an NLP start-up, researching transformer-based financial sentiment analysis</td>
-<td align="right" nowrap><sub>Feb - May 2026</sub></td>
+<td align="right" nowrap><sub>Feb 2026 - May 2026</sub></td>
 </tr>
 <tr>
 <td width="150" align="center"><img src="https://dsatlse.github.io/example_marketing.png" alt="LSE Data Science Society" height="36"/></td>
