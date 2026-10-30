@@ -101,8 +101,8 @@ A Python application for option pricing via Monte Carlo simulation and Black-Sch
 
 <div align="center">
 
-<img height="170" src="https://github-readme-stats.vercel.app/api?username=Thomas-F17&count_private=true&show_icons=true&hide_border=true&bg_color=00000000&title_color=F2A900&icon_color=F2A900&text_color=8B949E" alt="GitHub stats"/>
-<img height="170" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Thomas-F17&layout=compact&langs_count=8&hide=php,scss,css,html,batchfile,gherkin,freemarker,xslt,tsql,ruby&hide_border=true&bg_color=00000000&title_color=F2A900&text_color=8B949E" alt="Top languages"/>
+<img src="./assets/stats.svg" width="49%" alt="GitHub stats"/>
+<img src="./assets/langs.svg" width="49%" alt="Top languages"/>
 
 <img src="https://streak-stats.demolab.com?user=Thomas-F17&hide_border=true&background=00000000&ring=F2A900&fire=F2A900&currStreakLabel=F2A900&currStreakNum=8B949E&sideNums=8B949E&sideLabels=8B949E&dates=8B949E&stroke=8B949E" alt="GitHub streak"/>
 

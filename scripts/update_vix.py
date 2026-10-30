@@ -2,6 +2,9 @@
 
 Implied one-standard-deviation moves:  daily = VIX / sqrt(252),  weekly = VIX / sqrt(52)  (in %)
 
+Data:   FRED first; if that fails, the VIX comes from CBOE and the S&P 500 from Stooq.
+        If no S&P 500 source works, the card still shows the VIX and the % moves.
+
 Usage:  python scripts/update_vix.py          (live data, standard library only)
         python scripts/update_vix.py --demo   (synthetic data, for offline previews)
 """
@@ -14,14 +17,44 @@ NAVY, NAVY2, LINE, STEEL, AMBER, INK, MUTED = "#0B1F3A", "#13294A", "#1C365A", "
 MONO = "IBM Plex Mono,SFMono-Regular,Menlo,Consolas,monospace"
 SANS = "IBM Plex Sans,-apple-system,Segoe UI,Helvetica,Arial,sans-serif"
 
-def fred(series):
-    req = urllib.request.Request(FRED.format(series), headers={"User-Agent": "Mozilla/5.0 (readme-vix-updater)"})
-    text = urllib.request.urlopen(req, timeout=30).read().decode()
+def get(url):
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (readme-vix-updater)"})
+    return urllib.request.urlopen(req, timeout=30).read().decode("utf-8", "replace")
+
+def iso(d):
+    if "/" in d:                      # MM/DD/YYYY (CBOE)
+        m, dd, y = d.split("/"); return f"{int(y):04d}-{int(m):02d}-{int(dd):02d}"
+    return d
+
+def parse(text, close_col):
+    rows = list(csv.reader(io.StringIO(text)))
+    if not rows: return {}
+    head = [h.strip().lower() for h in rows[0]]
+    ci = head.index(close_col) if close_col in head else len(head) - 1
     out = {}
-    for row in csv.reader(io.StringIO(text)):
-        if len(row) == 2 and row[1] not in (".", "") and row[0][:1].isdigit():
-            out[row[0]] = float(row[1])
+    for r in rows[1:]:
+        if len(r) > ci and r[0][:1].isdigit() and r[ci] not in (".", "", "null"):
+            try: out[iso(r[0])] = float(r[ci])
+            except ValueError: pass
     return out
+
+def first_working(name, sources):
+    for label, url, col in sources:
+        try:
+            data = parse(get(url), col)
+            if len(data) > 30:
+                print(f"{name}: {len(data)} rows from {label}"); return data
+            print(f"{name}: {label} returned too little data")
+        except Exception as e:
+            print(f"{name}: {label} failed ({e})")
+    return {}
+
+def fetch_live():
+    vix = first_working("VIX", [("FRED", FRED.format("VIXCLS"), "vixcls"),
+                                ("CBOE", "https://cdn.cboe.com/api/global/us_indices/daily_prices/VIX_History.csv", "close")])
+    spx = first_working("S&P 500", [("FRED", FRED.format("SP500"), "sp500"),
+                                    ("Stooq", "https://stooq.com/q/d/l/?s=%5Espx&i=d", "close")])
+    return vix, spx
 
 def demo():
     rnd = random.Random(5); d = dt.date.today() - dt.timedelta(days=int(365 * YEARS_JSON))
@@ -40,11 +73,12 @@ def build_rows(vix, spx):
     rows, last_spx = [], None
     for d in sorted(set(vix) | set(spx)):
         last_spx = spx.get(d, last_spx)
-        if d < start or d not in vix or last_spx is None:
+        if d < start or d not in vix:
             continue
         v = vix[d]; dp, wp = v / math.sqrt(252), v / math.sqrt(52)
+        pts = (lambda pct: round(last_spx * pct / 100, 1)) if last_spx else (lambda pct: None)
         rows.append({"date": d, "vix": v, "spx": last_spx, "daily_pct": round(dp, 3), "weekly_pct": round(wp, 3),
-                     "daily_pts": round(last_spx * dp / 100, 1), "weekly_pts": round(last_spx * wp / 100, 1)})
+                     "daily_pts": pts(dp), "weekly_pts": pts(wp)})
     return rows
 
 def svg(rows):
@@ -69,13 +103,14 @@ def svg(rows):
             seen.add(m); mon = dt.date.fromisoformat(r["date"]).strftime("%b")
             g.append(f'<text x="{X(i):.1f}" y="{B+20}" text-anchor="middle" fill="{MUTED}">{mon}</text>')
     asof = dt.date.fromisoformat(last["date"]).strftime("%d %b %Y")
+    pts_text = lambda p: f"±{p:.0f} pts on the S&amp;P 500" if p is not None else "S&amp;P 500 move on a 1σ basis"
     def stat(x, label, big, small):
         return (f'<text x="{x}" y="50" fill="{MUTED}" style="font-family:{MONO};font-size:12px">{label}</text>'
                 f'<text x="{x}" y="84" fill="{INK}" style="font-family:{SANS};font-size:28px;font-weight:600">{big}</text>'
                 f'<text x="{x}" y="104" fill="{MUTED}" style="font-family:{MONO};font-size:12px">{small}</text>')
     stats = (stat(L, "VIX", f'{last["vix"]:.2f}', f"as of {asof}")
-             + stat(L + 230, "Implied daily move", f'±{last["daily_pct"]:.2f}%', f'±{last["daily_pts"]:.0f} pts on the S&amp;P 500')
-             + stat(L + 490, "Implied weekly move", f'±{last["weekly_pct"]:.2f}%', f'±{last["weekly_pts"]:.0f} pts on the S&amp;P 500'))
+             + stat(L + 230, "Implied daily move", f'±{last["daily_pct"]:.2f}%', pts_text(last["daily_pts"]))
+             + stat(L + 490, "Implied weekly move", f'±{last["weekly_pct"]:.2f}%', pts_text(last["weekly_pts"])))
     lx, ly = X(len(data) - 1), Y(last["vix"])
     line = (f'<polyline points="{pts}" fill="none" stroke="{AMBER}" stroke-width="2" stroke-linejoin="round" '
             f'pathLength="1" stroke-dasharray="1" stroke-dashoffset="1">'
@@ -89,7 +124,7 @@ def svg(rows):
     axes = (f'<text x="{L-10}" y="{T-12}" text-anchor="end" fill="{MUTED}">VIX</text>'
             f'<text x="{R+10}" y="{T-12}" fill="{MUTED}">Daily</text>')
     foot = (f'<text x="{L}" y="{H-14}" fill="{MUTED}" style="font-family:{MONO};font-size:10.5px">'
-            f'Last 12 months. One-standard-deviation moves: VIX/√252 daily, VIX/√52 weekly. Source: FRED, updated each weekday.</text>')
+            f'Last 12 months. One-standard-deviation moves: VIX/√252 daily, VIX/√52 weekly. Updated each weekday.</text>')
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-labelledby="t">'
             f'<title id="t">VIX {last["vix"]:.2f} as of {asof}: implied S&amp;P 500 move ±{last["daily_pct"]:.2f}% daily, ±{last["weekly_pct"]:.2f}% weekly</title>'
             f'<rect width="{W}" height="{H}" rx="12" fill="{NAVY}"/>{stats}'
@@ -99,13 +134,10 @@ def main():
     if "--demo" in sys.argv:
         vix, spx = demo()
     else:
-        try:
-            vix, spx = fred("VIXCLS"), fred("SP500")
-        except Exception as e:
-            sys.exit(f"Couldn't download data from FRED ({e}); leaving the existing files unchanged.")
+        vix, spx = fetch_live()
     rows = build_rows(vix, spx)
     if len(rows) < 30:
-        sys.exit("Not enough data returned from FRED; leaving the existing files unchanged.")
+        sys.exit("Couldn't get enough VIX data from any source; leaving the existing files unchanged.")
     os.makedirs(f"{ROOT}/assets", exist_ok=True)
     open(f"{ROOT}/assets/vix.svg", "w", encoding="utf-8").write(svg(rows))
     print(f'{len(rows)} rows, latest {rows[-1]["date"]}: VIX {rows[-1]["vix"]}')
